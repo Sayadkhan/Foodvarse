@@ -2,8 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const navActive = ({ isActive }) => {
+    return {
+      color: isActive ? "#f43f5e" : null,
+    };
+  };
   return (
-    <div className="navbar flex justify-between items-center container mx-auto py-8 lg:flex-row gap-5 lg:gap-0">
+    <div className="navbar flex justify-between items-center container mx-auto py-8 flex-col lg:flex-row gap-5 lg:gap-0">
       <h2 className="logo text-2xl font-bold lowercase italic">
         Food <span className="text-rose-500">verse</span>
       </h2>
@@ -17,15 +22,27 @@ const Navbar = () => {
         />
       </form>
 
-      <ul className="menu flex">
+      <ul className="menu flex gap-5">
         <li>
-          <NavLink end to="/">
+          <NavLink
+            style={navActive}
+            end
+            to="/"
+            className="text-gray-400 hover:text-gray-600 duration-300"
+          >
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/favourites">
-            Favourites<span className="favourites-count">(10)</span>
+          <NavLink
+            style={navActive}
+            to="/favourites"
+            className="text-gray-400 hover:text-gray-600 duration-300"
+          >
+            Favourites
+            <span className="favourites-count font-bold text-sky-400">
+              (10)
+            </span>
           </NavLink>
         </li>
       </ul>
