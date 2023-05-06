@@ -1,20 +1,31 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ searchHandler, inputfield, searchQuery, setSearchQuery }) => {
   const navActive = ({ isActive }) => {
     return {
       color: isActive ? "#f43f5e" : null,
     };
   };
+
+  // const searchHandler = (e) => {
+  //   e.preventDefault();
+
+  //   setSearchQuery("");
+
+  //   inputfield.current.blur();
+  // };
+
   return (
     <div className="navbar flex justify-between items-center container mx-auto py-8 flex-col lg:flex-row gap-5 lg:gap-0">
       <h2 className="logo text-2xl font-bold lowercase italic">
         Food <span className="text-rose-500">verse</span>
       </h2>
 
-      <form className="search-bar">
+      <form className="search-bar" onSubmit={searchHandler}>
         <input
+          ref={inputfield}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           type="search"
           placeholder="search recipe...."
           required
