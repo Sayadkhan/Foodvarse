@@ -1,7 +1,13 @@
 import React from "react";
 
-const Home = () => {
-  return <div>Home</div>;
+const Home = ({ recipes }) => {
+  return (
+    <div>
+      {recipes?.map((recipe) => (
+        <li key={recipe.recipe_id}>{recipe.title}</li>
+      ))}
+    </div>
+  );
 };
 
 export default Home;

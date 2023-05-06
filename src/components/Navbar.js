@@ -23,6 +23,7 @@ const Navbar = ({ searchHandler, inputfield, searchQuery, setSearchQuery }) => {
 
       <form className="search-bar" onSubmit={searchHandler}>
         <input
+          // name="search"
           ref={inputfield}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}

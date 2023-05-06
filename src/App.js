@@ -11,6 +11,12 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const inputfield = useRef(null);
 
+  const [recipes, setRecipes] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
   const searchHandler = (e) => {
     e.preventDefault();
 
@@ -22,9 +28,20 @@ const App = () => {
   };
 
   const getData = async (searchQuery) => {
-    const res = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes${searchQuery}`
-    );
+    try {
+      setLoading(true);
+      const res = await fetch(
+        `https://forkify-api.herokuapp.com/api/search?q=${searchQuery}`
+      );
+
+      if (!res.ok) throw new Error("No recipe found");
+
+      const data = await res.json();
+      console.log(data);
+      setRecipes(data.recipes);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -37,7 +54,10 @@ const App = () => {
           searchHandler={searchHandler}
         />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={<Home recipes={recipes} loading={loading} error={error} />}
+          />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
