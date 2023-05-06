@@ -9,7 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 const App = () => {
   return (
     <>
-      <div className="app">
+      <div className="app min-h-screen bg-rose-50 text-gray-600 text-lg">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
