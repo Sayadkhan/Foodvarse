@@ -8,16 +8,23 @@ import Favourites from "./components/Favourites";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
-  
   const [searchQuery, setSearchQuery] = useState("");
   const inputfield = useRef(null);
 
   const searchHandler = (e) => {
     e.preventDefault();
 
+    getData(searchQuery);
+
     setSearchQuery("");
 
     inputfield.current.blur();
+  };
+
+  const getData = async (searchQuery) => {
+    const res = await fetch(
+      `https://forkify-api.herokuapp.com/api/v2/recipes${searchQuery}`
+    );
   };
 
   return (
